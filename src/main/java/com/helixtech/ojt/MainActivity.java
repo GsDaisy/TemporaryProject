@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button gmapBtn;
+    Button nfcBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gmapIntent = new Intent(getApplicationContext(), GoogleMapsActivity.class);
                 startActivity(gmapIntent);
+            }
+        });
+
+        nfcBtn = findViewById(R.id.nfc_btn);
+        nfcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nfcIntent = new Intent(getApplicationContext(), NFCActivity.class);
             }
         });
     }
