@@ -6,16 +6,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-
 import androidx.core.app.NotificationCompat
-
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
 class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(s: String) {
@@ -25,14 +23,23 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        var title: String ?= null;
-        var message: String ?= null;
+
         //Toast.makeText(, remoteMessage.toString(),Toast.LENGTH_SHORT).show();
         Log.d(TAG, "Refreshed token: " + remoteMessage.from!!)
 
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
             showNotification(it.title, it.body)
+
+            val mhandler: Handler = Handler(Looper.getMainLooper())
+            mhandler.postDelayed(Runnable { 
+                @Override
+                fun run(){
+                    Toast.makeText(this, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT).show()
+                }
+            },0)
+
+            //Toast.makeText(this, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT)
         }
 
         //showNotification(remoteMessage.data["title"], remoteMessage.data["message"])
@@ -57,7 +64,6 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
                     "Channel human readable title",
