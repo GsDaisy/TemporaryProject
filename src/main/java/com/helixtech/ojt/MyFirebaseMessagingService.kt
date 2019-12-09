@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+
 class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(s: String) {
@@ -29,15 +30,20 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
-            showNotification(it.title, it.body)
+
 
             val mhandler: Handler = Handler(Looper.getMainLooper())
-            mhandler.postDelayed(Runnable { 
-                @Override
-                fun run(){
-                    Toast.makeText(this, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT).show()
+            mhandler.postDelayed(object : Runnable {
+
+                override fun run() {
+                    Toast.makeText(applicationContext, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT).show()
                 }
+
             },0)
+
+
+
+            showNotification(it.title, it.body)
 
             //Toast.makeText(this, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT)
         }

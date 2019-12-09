@@ -18,14 +18,11 @@ class NFCActivity : AppCompatActivity() {
 
     internal var nfcAdapter: NfcAdapter? = null
     internal lateinit var pendingIntent: PendingIntent
-    //private static String tagNum=null;
-    //internal var dataTxt: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nfc)
 
-        //dataTxt = findViewById(R.id.data_txt)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
@@ -65,7 +62,7 @@ class NFCActivity : AppCompatActivity() {
 
 
             Toast.makeText(this, sb.toString() , Toast.LENGTH_SHORT).show()
-            data_txt.setText(sb.toString())
+            data_txt.text = sb.toString()
 
         }
 
