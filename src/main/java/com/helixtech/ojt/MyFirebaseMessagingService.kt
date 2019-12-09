@@ -61,7 +61,7 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .setSmallIcon(R.drawable.helixtech_logo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
