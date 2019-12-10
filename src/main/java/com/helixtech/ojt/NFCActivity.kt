@@ -30,17 +30,21 @@ class NFCActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        if (nfcAdapter != null) {
-            nfcAdapter!!.disableForegroundDispatch(this)
+
+        nfcAdapter?.let {
+            it.disableForegroundDispatch(this)
         }
+
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        if (nfcAdapter != null) {
-            nfcAdapter!!.enableForegroundDispatch(this, pendingIntent, null, null)
+
+        nfcAdapter?.let {
+            it.enableForegroundDispatch(this, pendingIntent,null,null)
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
@@ -50,26 +54,27 @@ class NFCActivity : AppCompatActivity() {
         val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
         //val tag2 = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_DATA)
 
-        if (tag != null) {
 
+        tag?.let {
 
-            val byteData :ByteArray= tag.id
+            val byteData: ByteArray = tag.id
 
             var sb: StringBuilder = StringBuilder();
-            for(i in byteData){
+            for (i in byteData) {
                 sb.append(String.format("%02X", i and 0xff.toByte()))
             }
 
 
-            Toast.makeText(this, sb.toString() , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show()
             data_txt.text = sb.toString()
 
         }
-
     }
 
     /* companion object {
 
      }*/
+
+    fun firstN(n: Int): Array<Int> = Array(n, {i->i*i})
 
 }

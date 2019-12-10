@@ -40,8 +40,7 @@ class MainActivity : AppCompatActivity() {
                     // Get new Instance ID token
                     val token = task.result?.token
 
-                    // Log and toast
-                    //val msg = getString(R.string.msg_token_fmt, token)
+                    // Log and Toast
                     Log.d(TAG, token)
                     Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
                 })

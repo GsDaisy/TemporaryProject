@@ -36,20 +36,19 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
             mhandler.postDelayed(object : Runnable {
 
                 override fun run() {
-                    Toast.makeText(applicationContext, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "FCM : ${it.title}, ${it.body}", Toast.LENGTH_SHORT).show()
                 }
 
             },0)
 
 
-
             showNotification(it.title, it.body)
 
-            //Toast.makeText(this, "FCM : "+it.title+", "+it.body, Toast.LENGTH_SHORT)
+            //Toast.makeText(applicationContext, "FCM : ${it.title}, ${it.body}", Toast.LENGTH_SHORT).show()
         }
 
         //showNotification(remoteMessage.data["title"], remoteMessage.data["message"])
-        Log.d("remoteMessage", remoteMessage.data["title"]+remoteMessage.data["message"])
+        Log.d("remoteMessage", "${remoteMessage.data["title"]}, ${remoteMessage.data["message"]}")
     }
 
     private fun showNotification(title: String?, message: String?) {
@@ -84,4 +83,15 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
         private val TAG = "FCM"
     }
 
+
+    val lamda01 = {par1: Int, par2: Int ->
+        println("Here is the lamda01")
+        par1+par2
+    }
+
+    val lamda02 : (Int) -> Int = {par1 : Int -> par1*10}
+    val lamda03 : (Int, Int) -> Int = {par1 : Int, par2 : Int -> par1*par2}
+    val lamda04 : (String, Int) -> String = {
+        hello : String, num : Int -> "$hello number is $num"
+    }
 }
