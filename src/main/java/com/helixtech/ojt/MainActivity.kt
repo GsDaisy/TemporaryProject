@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
-        FirebaseInstanceId.getInstance().instanceId
-                .addOnCompleteListener(OnCompleteListener { task ->
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
                         Log.w(TAG, "getInstanceId failed", task.exception)
                         return@OnCompleteListener
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-
     }
 
 }
