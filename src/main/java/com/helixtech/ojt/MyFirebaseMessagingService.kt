@@ -48,6 +48,17 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
         //showNotification(remoteMessage.data["title"], remoteMessage.data["message"])
         Log.d("remoteMessage", "${remoteMessage.data["title"]}, ${remoteMessage.data["message"]}")
 
+
+        val mhandler2: Handler = Handler(Looper.getMainLooper())
+        mhandler2.postDelayed(object  : Runnable{
+            override fun run() {
+                Toast.makeText(applicationContext,"${remoteMessage.data["title"]}, ${remoteMessage.data["message"]}",Toast.LENGTH_SHORT).show()
+            }
+        },0)
+
+
+
+
     }
 
 
