@@ -17,6 +17,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebfaseMessagingService : FirebaseMessagingService() {
 
+    //When the token generate
     override fun onNewToken(s: String) {
         super.onNewToken(s)
         Log.d(TAG, "Refreshed token: $s")
@@ -35,11 +36,10 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
             mhandler.postDelayed(object : Runnable {
 
                 override fun run() {
-                    Toast.makeText(applicationContext, "FCM : ${it.title}, ${it.body}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MyFirebfaseMessagingService, "FCM : ${it.title}, ${it.body}", Toast.LENGTH_SHORT).show()
                 }
 
             },0)
-
 
             showNotification(it.title, it.body)
             //Toast.makeText(applicationContext, "FCM : ${it.title}, ${it.body}", Toast.LENGTH_SHORT).show()
@@ -85,7 +85,7 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
     }
 
 
-    val lamda01 = {par1: Int, par2: Int ->
+/*    val lamda01 = {par1: Int, par2: Int ->
         println("Here is the lamda01")
         par1+par2
     }
@@ -94,5 +94,5 @@ class MyFirebfaseMessagingService : FirebaseMessagingService() {
     val lamda03 : (Int, Int) -> Int = {par1 : Int, par2 : Int -> par1*par2}
     val lamda04 : (String, Int) -> String = {
         hello : String, num : Int -> "$hello number is $num"
-    }
+    }*/
 }

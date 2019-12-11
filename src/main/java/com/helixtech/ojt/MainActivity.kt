@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
+        //Search the Token
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
                         Log.w(TAG, "getInstanceId failed", task.exception)
